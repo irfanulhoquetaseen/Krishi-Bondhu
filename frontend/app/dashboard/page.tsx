@@ -34,6 +34,7 @@ import type { ExtractedQueryData } from "@/components/dashboard/structured-resul
 import type { TreatmentPlan } from "@/components/dashboard/diagnosis-report";
 import type { PriceCheckResponse } from "@/components/dashboard/market-price-anomaly";
 import type { FieldHealthCardReport } from "@/components/dashboard/field-health-card";
+import { API_BASE_URL } from "@/lib/api-config";
 
 // Dynamic imports with instant skeleton fallbacks for code-splitting
 const CropDiseaseDetector = dynamic(
@@ -112,7 +113,7 @@ export default function DashboardPage() {
     setIsLoadingHealth(true);
     setHealthError(null);
     try {
-      const res = await fetch("http://localhost:8000/health");
+      const res = await fetch(`${API_BASE_URL}/health`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setBackendHealth(data);
@@ -167,7 +168,7 @@ export default function DashboardPage() {
           };
         }
 
-        const res = await fetch("http://localhost:8000/api/treatment-plan", {
+        const res = await fetch(`${API_BASE_URL}/api/treatment-plan`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -257,7 +258,6 @@ export default function DashboardPage() {
   const generateFieldHealthCard = async () => {
     setIsGeneratingPassport(true);
     setPassportError(null);
-    const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
 
     try {
       const payload: Record<string, unknown> = {
@@ -273,7 +273,7 @@ export default function DashboardPage() {
       if (lastPriceResult) payload.price_analysis = lastPriceResult;
       if (uploadedLeafPreview) payload.crop_image_base64 = uploadedLeafPreview;
 
-      const res = await fetch(`${backendBase}/api/generate-report`, {
+      const res = await fetch(`${API_BASE_URL}/api/generate-report`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

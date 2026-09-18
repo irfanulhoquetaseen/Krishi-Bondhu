@@ -20,6 +20,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { AudioAdvisoryPlayer } from "./audio-advisory-player";
+import { API_BASE_URL } from "@/lib/api-config";
 
 export interface FieldHealthCardReport {
   passport_id: string;
@@ -102,8 +103,7 @@ export function FieldHealthCard({
     } catch (err) {
       console.error("[FieldHealthCard] PDF download error:", err);
       // Fallback: Open backend direct download endpoint in new window
-      const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
-      window.open(`${backendBase}/api/download-report-pdf/${report.passport_id}`, "_blank");
+      window.open(`${API_BASE_URL}/api/download-report-pdf/${report.passport_id}`, "_blank");
     } finally {
       setIsDownloading(false);
     }

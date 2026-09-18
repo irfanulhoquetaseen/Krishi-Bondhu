@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Send, Keyboard, Sparkles, Loader2, AlertCircle } from "lucide-react";
 import { ExtractedQueryData } from "./structured-result";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface ManualTextInputProps {
   onSuccess: (data: {
@@ -44,7 +45,7 @@ export function ManualTextInput({ onSuccess }: ManualTextInputProps) {
     setErrorMessage(null);
 
     try {
-      const response = await fetch("http://localhost:8000/api/text-intake", {
+      const response = await fetch(`${API_BASE_URL}/api/text-intake`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query_text: queryText }),

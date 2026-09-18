@@ -6,6 +6,7 @@ import { AudioVisualizer } from "./audio-visualizer";
 import { StructuredResult, ExtractedQueryData } from "./structured-result";
 import { ManualTextInput } from "./manual-text-input";
 import { VoiceProcessingSkeleton } from "./dashboard-skeletons";
+import { API_BASE_URL } from "@/lib/api-config";
 
 type IntakeState = "idle" | "recording" | "processing" | "done";
 
@@ -119,7 +120,7 @@ export function VoiceIntakeCard({ onAdvisoryReady }: { onAdvisoryReady?: (data: 
     formData.append("farmer_id", "demo-farmer-session");
 
     try {
-      const response = await fetch("http://localhost:8000/api/voice-intake", {
+      const response = await fetch(`${API_BASE_URL}/api/voice-intake`, {
         method: "POST",
         body: formData,
       });

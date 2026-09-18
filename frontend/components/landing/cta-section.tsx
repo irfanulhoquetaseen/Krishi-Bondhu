@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Terminal, ShieldCheck, CheckCircle } from "lucide-react";
 import { ScrollReveal } from "../ui/scroll-reveal";
+import { API_BASE_URL } from "@/lib/api-config";
 
 export function CtaSection() {
   return (
@@ -48,7 +49,7 @@ export function CtaSection() {
                   </Link>
 
                   <a
-                    href="http://localhost:8000/docs"
+                    href={`${API_BASE_URL}/docs`}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-4 bg-forest-900 hover:bg-forest-800 text-forest-100 border border-forest-700 font-heading font-semibold text-sm rounded-lg transition-colors"

@@ -27,6 +27,7 @@ import {
 } from "recharts";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PriceAnomalySkeleton } from "./dashboard-skeletons";
+import { API_BASE_URL } from "@/lib/api-config";
 
 export interface HistoricalPricePoint {
   date: string;
@@ -110,11 +111,8 @@ export function MarketPriceAnomaly({
       setIsLoading(true);
       setError(null);
 
-      const backendBase =
-        process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
-
       try {
-        const res = await fetch(`${backendBase}/api/price-check`, {
+        const res = await fetch(`${API_BASE_URL}/api/price-check`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

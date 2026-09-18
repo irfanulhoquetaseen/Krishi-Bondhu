@@ -12,6 +12,7 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { FieldHealthCard, FieldHealthCardReport } from "@/components/dashboard/field-health-card";
 import { PassportSkeleton } from "@/components/dashboard/dashboard-skeletons";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { API_BASE_URL } from "@/lib/api-config";
 
 export default function PassportPage() {
   const [report, setReport] = useState<FieldHealthCardReport | null>(null);
@@ -38,10 +39,8 @@ export default function PassportPage() {
     }
 
     // 2. Otherwise synthesize report from backend API
-    const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
-
     try {
-      const res = await fetch(`${backendBase}/api/generate-report`, {
+      const res = await fetch(`${API_BASE_URL}/api/generate-report`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

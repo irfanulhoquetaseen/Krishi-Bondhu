@@ -16,6 +16,7 @@ import {
   ShieldAlert,
   FileCheck,
 } from "lucide-react";
+import { API_BASE_URL } from "@/lib/api-config";
 
 export interface DiseaseDetectionResult {
   disease_name: string;
@@ -237,7 +238,7 @@ export function CropDiseaseDetector({ onDiseaseDetected, expectedCrop }: CropDis
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/disease-detection", {
+      const response = await fetch(`${API_BASE_URL}/api/disease-detection`, {
         method: "POST",
         body: formData,
       });
