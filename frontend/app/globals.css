@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-warm: #FAF7F0;
+    --surface-warm: #F4EFE6;
+    --card-warm: #FBF9F4;
+    --card-alt-warm: #F2EDE2;
+    --border-warm: #E5DED0;
+    --border-strong: #D6CCBC;
+    --forest-primary: #1F3D2B;
+    --forest-surface: #284E38;
+    --amber-accent: #D9A441;
+    --soil-secondary: #5C4632;
+    --ink-primary: #142018;
+    --ink-muted: #4C5951;
+    --ink-subtle: #738077;
+  }
+
+  .dark {
+    --bg-warm: #0C1610;
+    --surface-warm: #13241A;
+    --card-warm: #182C21;
+    --card-alt-warm: #1E3529;
+    --border-warm: #264232;
+    --border-strong: #385E49;
+    --forest-primary: #85BA99;
+    --forest-surface: #1E3B29;
+    --amber-accent: #E5B85C;
+    --soil-secondary: #BFA287;
+    --ink-primary: #F0F5F2;
+    --ink-muted: #A1B6A9;
+    --ink-subtle: #789182;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-warm);
+    color: var(--ink-primary);
+  }
+
+  body {
+    background-color: var(--bg-warm);
+    color: var(--ink-primary);
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), sans-serif;
+    letter-spacing: -0.03em;
+    color: var(--forest-primary);
+  }
+
+  ::selection {
+    background-color: #D9A441;
+    color: #142018;
+  }
+}
+
+/* Universal Dark Mode High-Contrast Adaptation */
+@layer utilities {
+  :where(.dark) .text-forest-950,
+  :where(.dark) .text-forest-900 {
+    color: var(--ink-primary);
+  }
+
+  :where(.dark) .text-forest-800 {
+    color: var(--forest-primary);
+  }
+
+  :where(.dark) .text-forest-700 {
+    color: #A3CFB4;
+  }
+
+  :where(.dark) .text-soil-900,
+  :where(.dark) .text-soil-800 {
+    color: var(--ink-primary);
+  }
+
+  :where(.dark) .text-soil-700,
+  :where(.dark) .text-soil-600,
+  :where(.dark) .text-soil {
+    color: var(--soil-secondary);
+  }
+
+  :where(.dark) .text-soil-500 {
+    color: #D6C4B2;
+  }
+
+  :where(.dark) .text-amber-700,
+  :where(.dark) .text-amber-800,
+  :where(.dark) .text-amber-900 {
+    color: var(--amber-accent);
+  }
+
+  /* Universal safety net for warm text tokens inside dark mode */
+  :where(.dark) [class*="text-warm-bg"] {
+    color: #F0F5F2;
+  }
+
+  :where(.dark) [class*="text-warm-cardAlt"] {
+    color: #C3D9CB;
+  }
+
+  :where(.dark) [class*="text-warm-card"]:not([class*="text-warm-cardAlt"]) {
+    color: #E1ECE5;
+  }
+
+  /* Dark mode badge, chip, and icon container contrast */
+  :where(.dark) .bg-soil-100,
+  :where(.dark) .bg-soil-50 {
+    background-color: rgba(92, 70, 50, 0.3);
+    border-color: rgba(191, 162, 135, 0.35);
+  }
+
+  :where(.dark) .bg-forest-100,
+  :where(.dark) .bg-forest-50 {
+    background-color: rgba(31, 61, 43, 0.5);
+    border-color: rgba(133, 186, 153, 0.3);
+  }
+}
+
+/* Subtle agricultural grid texture */
+.agro-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(31, 61, 43, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 61, 43, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .agro-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(133, 186, 153, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(133, 186, 153, 0.04) 1px, transparent 1px);
+}
+
+/* Technical telemetry border */
+.agro-border {
+  border: 1px solid var(--border-warm);
+}
+
+.agro-card {
+  background-color: var(--card-warm);
+  border: 1px solid var(--border-warm);
+  box-shadow: 0 1px 3px rgba(31, 61, 43, 0.04), 0 6px 16px -4px rgba(31, 61, 43, 0.05);
+}
+
+.dark .agro-card {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 8px 24px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-warm);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--soil-secondary);
+}
+
+/* Hide scrollbar utility for mobile navigation pill strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
